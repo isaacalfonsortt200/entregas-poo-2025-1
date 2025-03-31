@@ -1,0 +1,36 @@
+Cuantas mascotas va a ingresar?
+> 3
+
+Mascota 1, que clase es (Perro/Gato)?
+> perro
+Cual es el nombre del Perro?
+> Max
+Que edad tiene 'Max'?
+> 4
+De que raza es 'Max'?
+> Labrador
+
+Mascota 2, que clase es (Perro/Gato)?
+> gato
+Cual es el nombre del Gato?
+> Luna
+Que edad tiene 'Luna'?
+> 2
+De que raza es 'Luna'?
+> Siames
+
+Mascota 3, que clase es (Perro/Gato)?
+> perro
+Cual es el nombre del Perro?
+> Rocky
+Que edad tiene 'Rocky'?
+> 3
+De que raza es 'Rocky'?
+> Bulldog
+
+Resumen:
+| Clase | Nombre   | Edad  | Raza         | Fecha de ingreso          |
+|-------|---------|-------|-------------|--------------------------|
+| Perro | Max     | 4 años| Labrador    | 2025-03-30T12:34:56.123456|
+| Gato  | Luna    | 2 años| Siames      | 2025-03-30T12:34:56.123456|
+| Perro | Rocky   | 3 años| Bulldog     | 2025-03-30T12:34:56.123456|
