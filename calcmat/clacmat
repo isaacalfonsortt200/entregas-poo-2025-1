@@ -1,32 +1,29 @@
 class Matriz:
-    def _init_(self, elementos):
+    def __init__(self, elementos):
         if len(elementos) != 2 or any(len(fila) != 2 for fila in elementos):
             raise ValueError("La matriz debe ser de tamaño 2x2.")
         self.valores = elementos
 
-    def _add_(self, otra):
-        resultado = [
+    def __add__(self, otra):
+        return Matriz([
             [self.valores[i][j] + otra.valores[i][j] for j in range(2)]
             for i in range(2)
-        ]
-        return Matriz(resultado)
+        ])
 
-    def _sub_(self, otra):
-        resultado = [
+    def __sub__(self, otra):
+        return Matriz([
             [self.valores[i][j] - otra.valores[i][j] for j in range(2)]
             for i in range(2)
-        ]
-        return Matriz(resultado)
+        ])
 
-    def _mul_(self, otra):
-        resultado = [
+    def __mul__(self, otra):
+        return Matriz([
             [
                 self.valores[i][0] * otra.valores[0][j] + self.valores[i][1] * otra.valores[1][j]
                 for j in range(2)
             ]
             for i in range(2)
-        ]
-        return Matriz(resultado)
+        ])
 
     def mostrar(self):
         print(f"|{self.valores[0][0]}  {self.valores[0][1]}|")
@@ -67,11 +64,11 @@ def main():
         resultado = matriz1 * matriz2
         print("> La multiplicación de las dos matrices es:")
     else:
-        print("Opción no válida.")
+        print("> Opción no válida.")
         return
 
     resultado.mostrar()
 
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     main()
