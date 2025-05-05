@@ -1,3 +1,11 @@
+#Práctica de clase: calcmat
+
+#Este programa calcula matrices.
+
+#Isaac Alfonso Rodriguez
+#<ialfonsor@academia.usbbog.edu.co>
+
+
 class Matriz:
     def __init__(self, elementos):
         if len(elementos) != 2 or any(len(fila) != 2 for fila in elementos):
