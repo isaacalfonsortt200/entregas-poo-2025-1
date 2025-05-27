@@ -1,10 +1,11 @@
-#Práctica de clase: calcmat
+"""
+Práctica de clase: calcmat
 
-#Este programa calcula matrices.
+Este programa calcula matrices.
 
-#Isaac Alfonso Rodriguez
-#<ialfonsor@academia.usbbog.edu.co>
-
+Isaac Alfonso Rodriguez
+<ialfonsor@academia.usbbog.edu.co>
+"""
 
 class Matriz:
     def __init__(self, elementos):
