@@ -1,11 +1,11 @@
-"""
-título de práctica: GUIHello
+
+#título de práctica: GUIHello
 
 
-Autor: Isaac Alfonso Rodriguez
-<Ialfonsor@academia.usbbog.edu.co>
-Fecha: 2025-05-26
-"""
+#Autor: Isaac Alfonso Rodriguez
+#<Ialfonsor@academia.usbbog.edu.co>
+#Fecha: 2025-05-26
+
 
 
 import tkinter as tk
