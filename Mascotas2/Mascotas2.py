@@ -8,53 +8,65 @@ Fecha: 2025-04-27
 
 from datetime import datetime
 
-# Nueva clase Visualizador
-class Visualizador:
-    def resumen(self):
-        clase = "Perro" if isinstance(self, Perro) else "Gato"
-        return f"| {clase:<5} | {self.nombre:<8} | {self.edad:<4} años | {self.raza:<12} | {self.fecha_ingreso} |"
 
-# Modificamos la herencia
-class Mascota(Visualizador):
-    def _init_(self, nombre, edad, raza):
-        self.nombre = nombre
+class Mascota:
+    """Clase base para una mascota."""
+    def __init__(self, nombre, edad, raza):
+        self.nombre = nombre.capitalize()
         self.edad = edad
-        self.raza = raza
+        self.raza = raza.capitalize()
         self.fecha_ingreso = datetime.now().isoformat()
 
+
+class Visualizador:
+    """Clase para mostrar un resumen de mascotas."""
+
+    def resumen(self, lista_mascotas):
+        print("> Resumen:")
+        print("|Clase |Nombre   |Edad   |Raza         |Fecha de ingreso          |")
+        for mascota in lista_mascotas:
+            clase = mascota.__class__.__name__
+            print(f"|{clase:<6}|{mascota.nombre:<9}|{mascota.edad} años|{mascota.raza:<13}|{mascota.fecha_ingreso:<25}|" )
+
+
 class Perro(Mascota, Visualizador):
-    def _init_(self, nombre, edad, raza):
-        super()._init_(nombre, edad, raza)
+    """Clase Perro, hereda de Mascota y Visualizador."""
+    pass
+
 
 class Gato(Mascota, Visualizador):
-    def _init_(self, nombre, edad, raza):
-        super()._init_(nombre, edad, raza)
+    """Clase Gato, hereda de Mascota y Visualizador."""
+    pass
 
-def registrar_mascota():
+
+def ingresar_mascota(num):
+    tipo = input(f"> Mascota {num}, ¿qué clase es (P)erro o (G)ato?\n< ").strip().lower()
+    while tipo not in ['p', 'perro', 'g', 'gato']:
+        print("> Opción no válida. Ingrese 'perro' o 'gato'")
+        tipo = input(f"< ").strip().lower()
+
+    nombre = input(f"> ¿Cuál es el nombre del {'Perro' if tipo.startswith('p') else 'Gato'}?\n< ").strip()
+    edad = int(input(f"> ¿Qué edad tiene '{nombre}'?\n< "))
+    raza = input(f"> ¿De qué raza es '{nombre}'?\n< ").strip()
+
+    if tipo.startswith('p'):
+        return Perro(nombre, edad, raza)
+    else:
+        return Gato(nombre, edad, raza)
+
+
+def main():
     mascotas = []
-    num_mascotas = int(input("¿Cuántas mascotas va a ingresar?\n> "))
-    
-    for i in range(1, num_mascotas + 1):
-        tipo = input(f"Mascota {i}, ¿qué clase es (P)erro o (G)ato?\n> ").strip().lower()
-        
-        while tipo not in ['perro', 'gato', 'p', 'g']:
-            print("Opción no válida, intente de nuevo.")
-            tipo = input(f"Mascota {i}, ¿qué clase es (P)erro o (G)ato?\n> ").strip().lower()
-        
-        clase = "Perro" if tipo in ["perro", "p"] else "Gato"
-        nombre = input(f"¿Cuál es el nombre del {clase}?\n> ").strip()
-        edad = input(f"¿Qué edad tiene '{nombre}'?\n> ").strip()
-        raza = input(f"¿De qué raza es '{nombre}'?\n> ").strip()
-        
-        mascota = Perro(nombre, edad, raza) if tipo in ["perro", "p"] else Gato(nombre, edad, raza)
-        mascotas.append(mascota)
-        print()
-    
-    print("Resumen:")
-    print("| Clase | Nombre   | Edad  | Raza         | Fecha de ingreso          |")
-    print("|-------|---------|-------|-------------|----------------------------|")
-    for mascota in mascotas:
-        print(mascota.resumen())  # Aquí usamos el método resumen de Visualizador
 
-# Ejecutar la función de registro
-registrar_mascota()
+    cantidad = int(input("> ¿Cuántas mascotas va a ingresar?\n< "))
+    for i in range(1, cantidad + 1):
+        mascota = ingresar_mascota(i)
+        mascotas.append(mascota)
+
+    # Llamamos a resumen desde Visualizador
+    visualizador = Visualizador()
+    visualizador.resumen(mascotas)
+
+
+if __name__ == "__main__":
+    main()
