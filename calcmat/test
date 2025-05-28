@@ -1,3 +1,15 @@
+class Matriz:
+    def __init__(self, valores):
+        self.valores = valores
+
+    def __add__(self, otra):
+        resultado = []
+        for fila1, fila2 in zip(self.valores, otra.valores):
+            fila_suma = [a + b for a, b in zip(fila1, fila2)]
+            resultado.append(fila_suma)
+        return Matriz(resultado)
+
+
 def test_suma():
     """Test unitario para verificar la suma de dos matrices."""
     m1 = Matriz([[1, 2], [3, 4]])
@@ -7,7 +19,10 @@ def test_suma():
     print("✅ Test de suma: OK")
 
 
+def main():
+    print("Programa principal ejecutado.")
+
+
 if __name__ == "__main__":
-    # Ejecutar test antes del programa principal
     test_suma()
     main()
