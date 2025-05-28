@@ -6,42 +6,56 @@
 #<Ialfonsor@academia.usbbog.edu.co>
 #Fecha: 2025-05-26
 
-
-
 import tkinter as tk
 from tkinter import messagebox
 
-class VentanaSaludo:
-    def _init_(self, ventana):
-        self.ventana = ventana
-        ventana.title("Bienvenida")
 
-        # Texto guía
-        self.etiqueta_nombre = tk.Label(ventana, text="¿Cuál es tu nombre?")
-        self.etiqueta_nombre.grid(row=0, column=0, padx=8, pady=10)
+class AplicacionSaludo:
+    """
+    Clase principal para la aplicación de saludo.
+    Crea una interfaz gráfica con un campo de entrada, botones y etiquetas.
+    """
 
-        # Entrada de texto
-        self.campo_nombre = tk.Entry(ventana)
-        self.campo_nombre.grid(row=0, column=1, padx=8)
+    def __init__(self, master):
+        """
+        Inicializa la interfaz gráfica.
+        :param master: Ventana raíz de Tkinter.
+        """
+        self.master = master
+        master.title("Saludo en GUI")
+        master.geometry("300x150")
+        master.configure(bg="#f0f0f0")
 
-        # Botón para saludar
-        self.boton_saludar = tk.Button(ventana, text="Mostrar saludo", command=self.mostrar_saludo)
-        self.boton_saludar.grid(row=1, column=0, pady=10)
+        # Label: texto para indicar que se ingrese el nombre
+        self.label = tk.Label(master, text="¿Cómo te llamas?", font=("Arial", 12), bg="#f0f0f0")
+        self.label.pack(pady=10)
 
-        # Botón para cerrar
-        self.boton_cerrar = tk.Button(ventana, text="Cerrar", command=ventana.destroy)
-        self.boton_cerrar.grid(row=1, column=1)
+        # Entry: campo de texto para ingresar el nombre
+        self.entrada_nombre = tk.Entry(master, width=25)
+        self.entrada_nombre.pack()
+
+        # Botón para mostrar el saludo
+        self.boton_saludo = tk.Button(master, text="Saludar", command=self.mostrar_saludo, bg="#4CAF50", fg="white")
+        self.boton_saludo.pack(pady=5)
+
+        # Botón para salir de la aplicación
+        self.boton_salir = tk.Button(master, text="Salir", command=master.quit, bg="#f44336", fg="white")
+        self.boton_salir.pack()
 
     def mostrar_saludo(self):
-        nombre_usuario = self.campo_nombre.get().strip()
-        if nombre_usuario:
-            mensaje = f"¡Saludos, {nombre_usuario}!"
+        """
+        Toma el nombre ingresado y muestra un saludo con messagebox.
+        """
+        nombre = self.entrada_nombre.get().strip()
+        if nombre:
+            mensaje = f"Hola {nombre}!"
+            messagebox.showinfo("Saludo", mensaje)
         else:
-            mensaje = "Por favor escribe tu nombre."
-        messagebox.showinfo("Saludo personal", mensaje)
+            messagebox.showwarning("Campo vacío", "Por favor, ingresa tu nombre.")
 
-# Punto de entrada del programa
-if _name_ == "_main_":
-    ventana_principal = tk.Tk()
-    interfaz = VentanaSaludo(ventana_principal)
-    ventana_principal.mainloop()
+
+# Punto de entrada principal del programa
+if __name__ == "__main__":
+    ventana = tk.Tk()
+    app = AplicacionSaludo(ventana)
+    ventana.mainloop()
