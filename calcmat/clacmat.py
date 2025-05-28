@@ -1,9 +1,9 @@
 """
-Práctica de clase: calcmat
+Práctica de clase: MatrizCalc
 
-Este programa calcula matrices.
+Este programa realiza operaciones con matrices 2x2.
 
-Isaac Alfonso Rodriguez
+Autor: Isaac Alfonso Rodriguez
 <ialfonsor@academia.usbbog.edu.co>
 """
 
@@ -35,46 +35,61 @@ class Matriz:
         ])
 
     def mostrar(self):
-        print(f"|{self.valores[0][0]}  {self.valores[0][1]}|")
-        print(f"|{self.valores[1][0]}  {self.valores[1][1]}|")
+        print(f"| {self.valores[0][0]}  {self.valores[0][1]} |")
+        print(f"| {self.valores[1][0]}  {self.valores[1][1]} |")
 
 
-def ingresar_matriz(num):
-    print(f"> Matriz {num}:")
+def ingresar_matriz(numero):
+    print(f"\n> Ingrese los valores de la matriz {numero} (2x2):")
     elementos = []
     for i in range(2):
         fila = []
         for j in range(2):
-            valor = int(input(f"> Matriz {num}: elemento {i},{j}\n< "))
-            fila.append(valor)
+            while True:
+                try:
+                    valor = int(input(f"  - Elemento [{i+1},{j+1}]: "))
+                    fila.append(valor)
+                    break
+                except ValueError:
+                    print("  ! Valor no válido. Ingrese un número entero.")
         elementos.append(fila)
     return Matriz(elementos)
 
 
 def main():
+    print("=== CALCULADORA DE MATRICES 2x2 ===")
+    
     matriz1 = ingresar_matriz(1)
     matriz2 = ingresar_matriz(2)
 
-    print("> Matriz 1:")
+    print("\n> Matriz 1:")
     matriz1.mostrar()
     print("> Matriz 2:")
     matriz2.mostrar()
 
-    print("> Escriba 1 para suma, \n>         2 para resta, \n>         3 para multiplicación")
-    opcion = int(input("< "))
+    print("\n> Seleccione una operación:")
+    print("  1. Suma")
+    print("  2. Resta")
+    print("  3. Multiplicación")
+
+    while True:
+        try:
+            opcion = int(input("< Opción: "))
+            if opcion not in [1, 2, 3]:
+                raise ValueError
+            break
+        except ValueError:
+            print("  ! Opción inválida. Intente de nuevo.")
 
     if opcion == 1:
         resultado = matriz1 + matriz2
-        print("> La suma de las dos matrices es:")
+        print("\n> Resultado de la suma:")
     elif opcion == 2:
         resultado = matriz1 - matriz2
-        print("> La resta de las dos matrices es:")
+        print("\n> Resultado de la resta:")
     elif opcion == 3:
         resultado = matriz1 * matriz2
-        print("> La multiplicación de las dos matrices es:")
-    else:
-        print("> Opción no válida.")
-        return
+        print("\n> Resultado de la multiplicación:")
 
     resultado.mostrar()
 
