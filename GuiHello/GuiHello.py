@@ -11,34 +11,37 @@
 import tkinter as tk
 from tkinter import messagebox
 
-class AplicacionSaludo:
-    def __init__(self, master):
-        self.master = master
-        master.title("tk")
-        
-        # Etiqueta
-        self.label = tk.Label(master, text="Como te llamas?")
-        self.label.grid(row=0, column=0, padx=5, pady=10)
-        
-        # Campo de entrada
-        self.entrada = tk.Entry(master)
-        self.entrada.grid(row=0, column=1, padx=5)
-        
-        # Botón de saludo
-        self.boton_saludo = tk.Button(master, text="Saludo", command=self.saludar)
-        self.boton_saludo.grid(row=1, column=0, pady=10)
-        
-        # Botón de salir
-        self.boton_salir = tk.Button(master, text="Salir", command=master.quit)
-        self.boton_salir.grid(row=1, column=1)
+class VentanaSaludo:
+    def _init_(self, ventana):
+        self.ventana = ventana
+        ventana.title("Bienvenida")
 
-    def saludar(self):
-        nombre = self.entrada.get()
-        mensaje = f"Hola {nombre}!"
-        messagebox.showinfo("...", mensaje)
+        # Texto guía
+        self.etiqueta_nombre = tk.Label(ventana, text="¿Cuál es tu nombre?")
+        self.etiqueta_nombre.grid(row=0, column=0, padx=8, pady=10)
 
-# Crear ventana raíz e iniciar aplicación
-if __name__ == "__main__":
-    root = tk.Tk()
-    app = AplicacionSaludo(root)
-    root.mainloop()
+        # Entrada de texto
+        self.campo_nombre = tk.Entry(ventana)
+        self.campo_nombre.grid(row=0, column=1, padx=8)
+
+        # Botón para saludar
+        self.boton_saludar = tk.Button(ventana, text="Mostrar saludo", command=self.mostrar_saludo)
+        self.boton_saludar.grid(row=1, column=0, pady=10)
+
+        # Botón para cerrar
+        self.boton_cerrar = tk.Button(ventana, text="Cerrar", command=ventana.destroy)
+        self.boton_cerrar.grid(row=1, column=1)
+
+    def mostrar_saludo(self):
+        nombre_usuario = self.campo_nombre.get().strip()
+        if nombre_usuario:
+            mensaje = f"¡Saludos, {nombre_usuario}!"
+        else:
+            mensaje = "Por favor escribe tu nombre."
+        messagebox.showinfo("Saludo personal", mensaje)
+
+# Punto de entrada del programa
+if _name_ == "_main_":
+    ventana_principal = tk.Tk()
+    interfaz = VentanaSaludo(ventana_principal)
+    ventana_principal.mainloop()
